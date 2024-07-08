@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 require '../_classes/Database/UserTable.php';
 require '../_classes/HTTP.php';
+require '../_classes/common.php';
 
 use _classes\Database\MySQL;
 use _classes\Database\UserTable;

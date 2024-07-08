@@ -1,3 +1,8 @@
+<?php
+session_start();
+require '_classes/common.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -108,6 +113,12 @@
                       class="row g-3 needs-validation"
                       novalidate
                     >
+                      <input 
+                        type="hidden" 
+                        name="_token"
+                        value="<?= $_SESSION['_token'] ?>"
+                      >
+
                       <div class="col-12">
                         <label for="yourUsername" class="form-label">
                           Email

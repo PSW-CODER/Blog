@@ -44,10 +44,10 @@ class UserTable{
         return $statement->rowCount();
     }
 
-    public function updateEmail($email){
+    public function updateEmail($email, $id){
         $query = "SELECT * FROM users WHERE email = :email AND id != :id";
         $statement = $this->db->prepare($query);
-        $statement->execute([':email' => $email]);
+        $statement->execute([':email' => $email, ':id' => $id]);
         return $statement->rowCount();
     }
 

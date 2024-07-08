@@ -2,6 +2,7 @@
 session_start();
 require '../_classes/Database/PostTable.php';
 require '../_classes/HTTP.php';
+require '../_classes/common.php';
 
 use _classes\HTTP;
 use _classes\Database\MySQL;
@@ -12,7 +13,7 @@ $table = new PostTable(new MySQL());
 if($table){
     if(isset($_POST['submit'])){
 
-        if(!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['image']['name'])){
+        if(!empty($_POST['title']) && !empty($_POST['content']) && !empty($_FILES['image']['name'])){
             $targetFile = '../images/'.$_FILES['image']['name'];
             $imageType = pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
     

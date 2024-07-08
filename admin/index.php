@@ -2,6 +2,7 @@
   session_start();
   require '../_classes/Auth.php';
   require '../_classes/Database/PostTable.php';
+  require '../_classes/common.php';
 
   use _classes\Auth;
   use _classes\Database\PostTable;
@@ -117,6 +118,7 @@
 
     <div class="search-bar ms-auto">
       <form class="search-form d-flex align-items-center" method="post" action="">
+        <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
         <input type="text" name="search" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
@@ -209,41 +211,51 @@
           <div class="card">
             <div class="card-body p-4">
               <div class="table-responsive">
-                <table class="blog-table table table-striped align-middle">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Content</th>
-                      <th scope="col">Author</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                      $i = 1;
-                      foreach ($posts as $post) {
+                <?php
+                  if(!$posts){
+                ?>
+                  <p class="text-center card-title m-0">No Found Blog</p>
+                <?php
+                  }else{
+                ?>
+                  <table class="blog-table table table-striped align-middle">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php 
+                        $i = 1;
+                        foreach ($posts as $post) {
+                        ?>
+                          <tr>
+                            <th scope="row"><?= $i ?></td>
+                            <td><?= $post->title ?></td>
+                            <td><?= substr($post->content, 0, 50) ?>...</td>
+                            <td><?= $post->author ?></td>
+                            <td><?= date('Y-m-d', strtotime($post->created_at)) ?></td>
+                            <td>
+                              <div class="d-flex gap-1">
+                                <a href="edit-post.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                <a href="../_actions/post-delete.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
+                              </div>
+                            </td>
+                          </tr>
+                        <?php
+                          $i++;
+                        }
                       ?>
-                        <tr>
-                          <th scope="row"><?= $i ?></td>
-                          <td><?= $post->title ?></td>
-                          <td><?= substr($post->content, 0, 50) ?>...</td>
-                          <td><?= $post->author ?></td>
-                          <td><?= date('Y-m-d', strtotime($post->created_at)) ?></td>
-                          <td>
-                            <div class="d-flex gap-1">
-                              <a href="edit-post.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
-                              <a href="../_actions/post-delete.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <?php
-                        $i++;
-                      }
-                    ?>
-                  </tbody>
+                    </tbody>
                 </table>
+                <?php
+                  }
+                ?>
               </div>
             </div>
           </div>

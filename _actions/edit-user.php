@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 require '../_classes/Database/UserTable.php';
 require '../_classes/HTTP.php';
+require '../_classes/common.php';
 
 use _classes\HTTP;
 use _classes\Database\MySQL;
@@ -10,7 +11,7 @@ use _classes\Database\UserTable;
 $table = new UserTable(new MySQL());
 
 if($table){
-    $alreadyEmail = $table->checkEmail($_POST['email']);
+    $alreadyEmail = $table->updateEmail($_POST['email'], $_POST['userId']);
 
     if($alreadyEmail){
         echo"

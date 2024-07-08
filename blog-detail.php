@@ -2,6 +2,7 @@
     session_start();
     require '_classes/Database/PostTable.php';
     require '_classes/Auth.php';
+    require '_classes/common.php';
 
     use _classes\Database\PostTable;
     use _classes\Database\MySQL;
@@ -113,6 +114,8 @@
             <div class="d-flex justify-content-center">
                 <div class="col-lg-8">
                     <form action="_actions/comment.php" method="post">
+                        <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
+                                
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title text-center pb-1" style="font-size: 1.8rem; font-weight: bolder;"><?= $blog->title ?></div>

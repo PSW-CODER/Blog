@@ -1,12 +1,13 @@
 <?php
+session_start();
 
 require '../_classes/Database/CommentTable.php';
 require '../_classes/HTTP.php';
+require '../_classes/common.php';
 
 use _classes\Database\MySQL;
 use _classes\Database\CommentTable;
 use _classes\HTTP;
-
 
 $table = new CommentTable(new MySQL());
 

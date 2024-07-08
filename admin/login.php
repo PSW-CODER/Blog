@@ -1,11 +1,14 @@
+<?php
+session_start();
+require '../_classes/common.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>BlogAdmin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -73,6 +76,7 @@
                   ?>
 
                   <form action="../_actions/login.php" class="row g-3 needs-validation" novalidate method="post">
+                    <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>

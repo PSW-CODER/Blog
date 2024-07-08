@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 require '../_classes/Database/UserTable.php';
 require '../_classes/HTTP.php';
+require '../_classes/common.php';
 
 use _classes\HTTP;
 use _classes\Database\MySQL;
@@ -20,12 +21,8 @@ if($table){
                     window.location.href = '../admin/add-user.php';
                 </script>
             ";
-        }else{
-            if(!empty($_POST['name']) &&
-            !empty($_POST['emial']) &&
-            !empty($_POST['password']) &&
-            !empty($_POST['role'])
-            ){
+        }else{                        
+            if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])){
                 $data = [
                     'name' => $_POST['name'],
                     'email' => $_POST['email'],
