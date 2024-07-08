@@ -2,6 +2,7 @@
   session_start();
   require '../_classes/Auth.php';
   require '../_classes/Database/UserTable.php';
+  require '../_classes/escape.php';
 
   use _classes\Auth;
   use _classes\Database\UserTable;
@@ -135,13 +136,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/<?= $user->image?>" alt="Profile" class="rounded-circle border border-2">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user->name ?></span>
+            <img src="../assets/img/<?= escape($user->image) ?>" alt="Profile" class="rounded-circle border border-2">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= escape($user->name) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?= $user->name ?></h6>
+              <h6><?= escape($user->name) ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -233,9 +234,9 @@
                         foreach ($totalUser as $user) {
                         ?>
                           <tr>
-                            <th scope="row"><?= $i ?></td>
-                            <td><?= $user->name ?></td>
-                            <td><?= $user->email ?></td>
+                            <th scope="row"><?= escape($i) ?></td>
+                            <td><?= escape($user->name) ?></td>
+                            <td><?= escape($user->email) ?></td>
                             <td style="font-weight: 550;">
                               <?php 
                                   if($user->role_id !== 1){  
@@ -245,11 +246,11 @@
                                   }
                               ?>
                             </td>
-                            <td><?= date('Y-m-d', strtotime($user->created_at)) ?></td>
+                            <td><?= escape(date('Y-m-d', strtotime($user->created_at))) ?></td>
                             <td>
                               <div class="d-flex gap-1">
-                                <a href="edit-user.php?user-id=<?= $user->id ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                <a href="../_actions/user-delete.php?user-id=<?= $user->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
+                                <a href="edit-user.php?user-id=<?= escape($user->id) ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                <a href="../_actions/user-delete.php?user-id=<?= escape($user->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
                               </div>
                             </td>
                           </tr>

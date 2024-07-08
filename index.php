@@ -2,6 +2,7 @@
     session_start();
     require '_classes/Database/PostTable.php';
     require '_classes/Auth.php';
+    require '_classes/escape.php';
 
     use _classes\Database\PostTable;
     use _classes\Database\MySQL;
@@ -95,12 +96,12 @@
                 data-bs-toggle="dropdown"
               >
                 <img
-                  src="images/<?= $user->image ?>"
+                  src="images/<?= escape($user->image) ?>"
                   alt="Profile"
                   class="rounded-circle border border-2"
                 />
                 <span class="d-none d-md-block dropdown-toggle ps-2"
-                  ><?= $user->name ?></span
+                  ><?= escape($user->name) ?></span
                 > </a
               ><!-- End Profile Iamge Icon -->
 
@@ -108,7 +109,7 @@
                 class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
               >
                 <li class="dropdown-header">
-                  <h6><?= $user->name ?></h6>
+                  <h6><?= escape($user->name) ?></h6>
                   <span>
                     <?php 
                       if($user->role_id === 1){ ?> 
@@ -152,14 +153,14 @@
             foreach ($results as $result) {
             ?>
           <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <a href="blog-detail.php?blog=<?= $result->id ?>">
+            <a href="blog-detail.php?blog=<?= escape($result->id) ?>">
               <div class="card h-100">
                 <div class="card-title text-center pb-1">
-                  <?= $result->title ?>
+                  <?= escape($result->title) ?>
                 </div>
                 <div class="card-body" style="heigth: 264px !important">
                   <img
-                    src="images/<?= $result->image ?>"
+                    src="images/<?= escape($result->image) ?>"
                     alt=""
                     class="w-100 h-100 card-img"
                   />

@@ -3,6 +3,7 @@
   require '../_classes/Auth.php';
   require '../_classes/Database/PostTable.php';
   require '../_classes/common.php';
+  require '../_classes/escape.php';
 
   use _classes\Auth;
   use _classes\Database\PostTable;
@@ -118,7 +119,7 @@
 
     <div class="search-bar ms-auto">
       <form class="search-form d-flex align-items-center" method="post" action="">
-        <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
+        <input type="hidden" name="_token" value="<?= escape($_SESSION['_token']) ?>">
         <input type="text" name="search" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
@@ -136,13 +137,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/<?= $user->image?>" alt="Profile" class="rounded-circle border border-2">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user->name ?></span>
+            <img src="../assets/img/<?= escape($user->image) ?>" alt="Profile" class="rounded-circle border border-2">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= escape($user->name) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?= $user->name ?></h6>
+              <h6><?= escape($user->name) ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -235,15 +236,15 @@
                         foreach ($posts as $post) {
                         ?>
                           <tr>
-                            <th scope="row"><?= $i ?></td>
-                            <td><?= $post->title ?></td>
-                            <td><?= substr($post->content, 0, 50) ?>...</td>
-                            <td><?= $post->author ?></td>
-                            <td><?= date('Y-m-d', strtotime($post->created_at)) ?></td>
+                            <th scope="row"><?= escape($i) ?></td>
+                            <td><?= escape($post->title) ?></td>
+                            <td><?= substr(escape($post->content), 0, 50) ?>...</td>
+                            <td><?= escape($post->author) ?></td>
+                            <td><?= escape(date('Y-m-d', strtotime($post->created_at))) ?></td>
                             <td>
                               <div class="d-flex gap-1">
-                                <a href="edit-post.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                <a href="../_actions/post-delete.php?post-id=<?= $post->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
+                                <a href="edit-post.php?post-id=<?= escape($post->id) ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                <a href="../_actions/post-delete.php?post-id=<?= escape($post->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></a>
                               </div>
                             </td>
                           </tr>

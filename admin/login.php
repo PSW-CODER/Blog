@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../_classes/common.php';
+require '../_classes/escape.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +77,7 @@ require '../_classes/common.php';
                   ?>
 
                   <form action="../_actions/login.php" class="row g-3 needs-validation" novalidate method="post">
-                    <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
+                    <input type="hidden" name="_token" value="<?= escape($_SESSION['_token']) ?>">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>

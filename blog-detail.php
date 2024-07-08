@@ -3,6 +3,7 @@
     require '_classes/Database/PostTable.php';
     require '_classes/Auth.php';
     require '_classes/common.php';
+    require '_classes/escape.php';
 
     use _classes\Database\PostTable;
     use _classes\Database\MySQL;
@@ -70,13 +71,13 @@
             <ul class="d-flex align-items-center">
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="images/<?= $user->image ?>" alt="Profile" class="rounded-circle border border-2">
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user->name ?></span>
+                        <img src="images/<?= escape($user->image) ?>" alt="Profile" class="rounded-circle border border-2">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><?= escape($user->name) ?></span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?= $user->name ?></h6>
+                            <h6><?= escape($user->name) ?></h6>
                             <span>
                                 <?php 
                                 if($user->role_id === 1){
@@ -114,19 +115,19 @@
             <div class="d-flex justify-content-center">
                 <div class="col-lg-8">
                     <form action="_actions/comment.php" method="post">
-                        <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
+                        <input type="hidden" name="_token" value="<?= escape($_SESSION['_token']) ?>">
                                 
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title text-center pb-1" style="font-size: 1.8rem; font-weight: bolder;"><?= $blog->title ?></div>
+                                <div class="card-title text-center pb-1" style="font-size: 1.8rem; font-weight: bolder;"><?= escape($blog->title) ?></div>
                             </div>
                             <div class="card-body mt-4">     
-                                <input type="hidden" name="authorId" value="<?= $user->id ?>">
-                                <input type="hidden" name="blogId" value="<?= $blog->id ?>">   
-                                <img src="images/<?= $blog->image ?>" alt="" class="card-img">
-                                <p class="card-text mt-3"><?= $blog->content ?></p>
+                                <input type="hidden" name="authorId" value="<?= escape($user->id) ?>">
+                                <input type="hidden" name="blogId" value="<?= escape($blog->id) ?>">   
+                                <img src="images/<?= escape($blog->image) ?>" alt="" class="card-img">
+                                <p class="card-text mt-3"><?= escape($blog->content) ?></p>
                                     
-                                <h6 class="text-end" style="font-size: 14px"><?= date('d-m-Y', strtotime($blog->created_at)) ?></h6>
+                                <h6 class="text-end" style="font-size: 14px"><?= escape(date('d-m-Y', strtotime($blog->created_at))) ?></h6>
                             </div>
                             <div class="card-footer">
                                 <div class="comment-wrap px-1 mb-4">
@@ -139,13 +140,13 @@
                                             <div class="comment p-2 rounded-2" style="background-color: #f7f9ff">
                                                 <div class="comment-writer d-flex justify-content-between align-items-center gap-3">
                                                     <div class="d-flex align-items-center gap-3">
-                                                    <img src="images/<?= $comment->photo ?>" class="rounded-circle border border-2" width="40px" height="40px" alt="">
-                                                        <h6 class="name" style="font-weight: bolder!important;"><?= $comment->author ?></h6>
+                                                    <img src="images/<?= escape($comment->photo) ?>" class="rounded-circle border border-2" width="40px" height="40px" alt="">
+                                                        <h6 class="name" style="font-weight: bolder!important;"><?= escape($comment->author) ?></h6>
                                                     </div>
-                                                    <p style="font-size: 14px"><?= date('d-m-Y', strtotime($comment->created_at)) ?></p>
+                                                    <p style="font-size: 14px"><?= escape(date('d-m-Y', strtotime($comment->created_at))) ?></p>
                                                 </div>
 
-                                                <p class="card-text ms-5 ps-3 pb-3"><?= $comment->content ?></p>
+                                                <p class="card-text ms-5 ps-3 pb-3"><?= escape($comment->content) ?></p>
                                             </div>
                                         </li>
                                         <?php
@@ -157,7 +158,7 @@
                                 <div class="action-btn position-relative px-1">
                                     <div class="input-comment-wrap p-2 rounded-2" style="background-color: #f7f9ff">
                                         <div class="comment-writer d-flex align-items-center gap-3 p-2">
-                                            <img src="images/<?= $user->image ?>" class="rounded-circle border border-2" width="40px" height="40px" alt="">
+                                            <img src="images/<?= escape($user->image) ?>" class="rounded-circle border border-2" width="40px" height="40px" alt="">
                                             <div class="position-relative w-100">
                                                 <input type="text" name="comment" class="form-control" placeholder="Enter your comment">
                                                 <button class="position-absolute btn" style="top: 50%; right: 2px; transform: translateY(-50%)">

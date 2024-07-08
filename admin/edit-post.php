@@ -3,6 +3,7 @@
   require '../_classes/Auth.php';
   require '../_classes/Database/PostTable.php';
   require '../_classes/common.php';
+  require '../_classes/escape.php';
 
   use _classes\Auth;
   use _classes\Database\PostTable;
@@ -85,13 +86,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="../assets/img/<?= $user->image?>" alt="Profile" class="rounded-circle border border-2">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user->name ?></span>
+          <img src="../assets/img/<?= escape($user->image) ?>" alt="Profile" class="rounded-circle border border-2">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= escape($user->name) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?= $user->name ?></h6>
+              <h6><?= escape($user->name) ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -155,12 +156,12 @@
               
               <!-- Vertical Form -->
               <form action="../_actions/edit-post.php" class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
-                <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
-                <input type="hidden" name="postId" value="<?= $post->id ?>">
+                <input type="hidden" name="_token" value="<?= escape($_SESSION['_token']) ?>">
+                <input type="hidden" name="postId" value="<?= escape($post->id) ?>">
                 <div class="col-12">
                   <label for="validationCustomUsername" class="form-label">Title</label>
                   <div class="has-validation">
-                    <input type="text" name="title" class="form-control" value="<?= $post->title ?>" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                    <input type="text" name="title" class="form-control" value="<?= escape($post->title) ?>" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
                       Enter a title.
                     </div>
@@ -169,7 +170,7 @@
                 <div class="col-12">
                   <label for="validationCustomContent" class="form-label">Content</label>
                   <div class="has-validation">
-                    <textarea name="content" rows="4" id="validationCustomContent" class="form-control" required><?= $post->content ?></textarea>
+                    <textarea name="content" rows="4" id="validationCustomContent" class="form-control" required><?= escape($post->content) ?></textarea>
                     <div class="invalid-feedback">
                       Enter a content.
                     </div>
@@ -182,7 +183,7 @@
                     ?>
                       <div class="card w-25">
                         <div class="card-image">
-                          <img src="../images/<?= $post->image ?>" class="card-img" alt="">
+                          <img src="../images/<?= escape($post->image) ?>" class="card-img" alt="">
                         </div>
                       </div>
                     <?php

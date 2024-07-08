@@ -3,6 +3,7 @@
   require '../_classes/Auth.php';
   require '../_classes/Database/UserTable.php';
   require '../_classes/common.php';
+  require '../_classes/escape.php';
 
   use _classes\Auth;
   use _classes\Database\UserTable;
@@ -78,13 +79,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="../assets/img/<?= $user->image?>" alt="Profile" class="rounded-circle border border-2">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user->name ?></span>
+          <img src="../assets/img/<?= escape($user->image) ?>" alt="Profile" class="rounded-circle border border-2">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= escape($user->name) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?= $user->name ?></h6>
+              <h6><?= escape($user->name) ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -148,7 +149,7 @@
               
               <!-- Vertical Form -->
               <form action="../_actions/add-user.php" class="row g-3 needs-validation" method="post" novalidate>
-                <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">  
+                <input type="hidden" name="_token" value="<?= escape($_SESSION['_token']) ?>">  
 
                 <div class="col-12">
                     <label for="yourName" class="form-label">Your Name</label>

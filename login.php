@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '_classes/common.php';
+require '_classes/escape.php';
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +117,7 @@ require '_classes/common.php';
                       <input 
                         type="hidden" 
                         name="_token"
-                        value="<?= $_SESSION['_token'] ?>"
+                        value="<?= escape($_SESSION['_token']) ?>"
                       >
 
                       <div class="col-12">
